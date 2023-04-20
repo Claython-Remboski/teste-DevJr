@@ -1,0 +1,3 @@
+Para utilização da integração, basta disparar um webhook Post para a rota
+https://n8n-site.agnus.app/webhook/194a55c5-427d-492a-9f7a-ac3552d1ef15
+Irá ser exibido na plataforma n8n, demonstrado no arquivo de imagem anexo.
