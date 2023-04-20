@@ -1,0 +1,120 @@
+{
+    "meta": {
+      "instanceId": "97b1de0f7383a6e1bdbba48e4bca8e6d46a6465556c01a045a5f52c9a0840d31"
+    },
+    "nodes": [
+      {
+        "parameters": {
+          "url": "https://api.github.com/users/Claython-Remboski",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Accept",
+                "value": "application/vnd.github+json"
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer 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"
+              },
+              {
+                "name": "X-GitHub-Api-Version",
+                "value": "2022-11-28"
+              }
+            ]
+          },
+          "options": {
+            "redirect": {
+              "redirect": {
+                "followRedirects": true
+              }
+            }
+          }
+        },
+        "id": "5512b92b-7579-4c41-894c-587ce0c3bbe3",
+        "name": "HTTP Request",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 3,
+        "position": [
+          1140,
+          480
+        ]
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "194a55c5-427d-492a-9f7a-ac3552d1ef15",
+          "options": {
+            "responseData": "={{Object.values($node[\"Set\"].parameter[\"values\"][\"string\"][0]).join(', ')}} {{$node[\"Set\"].parameter[\"values\"][\"string\"][0][\"value\"]}}\n{{Object.values($node[\"Set\"].parameter[\"values\"][\"string\"][1]).join(', ')}}\n{{Object.values($node[\"Set\"].parameter[\"values\"][\"string\"][2]).join(', ')}}\n{{Object.values($node[\"Set\"].parameter[\"values\"][\"string\"][3]).join(', ')}}"
+          }
+        },
+        "id": "148888d5-eb62-47c9-87a0-f1ebdf5b1120",
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 1,
+        "position": [
+          940,
+          480
+        ],
+        "webhookId": "194a55c5-427d-492a-9f7a-ac3552d1ef15"
+      },
+      {
+        "parameters": {
+          "keepOnlySet": true,
+          "values": {
+            "string": [
+              {
+                "name": "Nome:",
+                "value": "={{ $json[\"login\"] }}"
+              },
+              {
+                "name": "Localização",
+                "value": "={{ $json[\"location\"] }}"
+              },
+              {
+                "name": "Seguidores",
+                "value": "={{ $json[\"followers\"] }}"
+              },
+              {
+                "name": "Data de Criação",
+                "value": "={{ $json[\"created_at\"] }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "ba011d46-13ff-46d9-9703-4bc03a3632d5",
+        "name": "Set",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 1,
+        "position": [
+          1360,
+          480
+        ]
+      }
+    ],
+    "connections": {
+      "HTTP Request": {
+        "main": [
+          [
+            {
+              "node": "Set",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    }
+  }
